@@ -1,0 +1,16 @@
+import styled from 'styled-components';
+
+export const Container = styled.div`
+  height: 100vh;
+  max-width: 992px;
+  margin: 0 auto;
+  padding: 2.5rem 2rem;
+  display: flex;
+  flex-direction: column;    
+`
+
+export const Content = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-top: 110px;  
+`
