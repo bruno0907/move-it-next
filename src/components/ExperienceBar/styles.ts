@@ -19,7 +19,7 @@ export const TotalExperienceBar = styled.div`
   height: 4px;
   border-radius: 4px;
   background: var(--gray-line);
-  margin: 0 1.5rem;  
+  margin: 0 1.5rem;   
 `
 
 export const CurrentExperienceBar = styled.div<ExperienceBar>`
@@ -32,6 +32,6 @@ export const CurrentExperienceBar = styled.div<ExperienceBar>`
   span{    
     position: absolute;    
     top: 10px;
-    transform: translateX(${({ experiencePercentage }) => `-${experiencePercentage}`})
+    transform: translateX(-50%)
   }
 `

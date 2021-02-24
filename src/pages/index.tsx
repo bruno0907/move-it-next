@@ -1,6 +1,9 @@
+import React from "react";
+
+import Profile from "../components/Profile";
+import CountdownTimer from "../components/CountdownTimer";
 import ExperienceBar from "../components/ExperienceBar";
-import TimerCard from "../components/TimerCard";
-import ChallengesCard from "../components/ChallengesCard";
+import Challenges from "../components/Challenges";
 
 import { Container, Content } from '../styles/App'
 
@@ -9,8 +12,13 @@ export default function Home() {
     <Container>
       <ExperienceBar /> 
       <Content>
-        <TimerCard />
-        <ChallengesCard />
+        <aside>
+          <Profile />          
+          <CountdownTimer />
+        </aside>
+        <section>
+          <Challenges />
+        </section>
       </Content>
     </Container>
   )
