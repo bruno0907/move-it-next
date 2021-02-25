@@ -19,12 +19,26 @@ export const CountdownContext = createContext({} as ICountdownContext)
 export const CountdownProvider = ({ children }: ICountdownProvider) => {
   const { startNewChallenge, resetChallenge } = useContext(ChallengesContext)
   
-  const [timer, setTimer] = useState(0.1 * 60)
+  const [timer, setTimer] = useState(0.05 * 60)
   const [isCountdownActive, setIsCountdownActive] = useState(false)
   const [hasCountdownFinished, setHasCountdownFinished] = useState(false)
   
   let countdownTimeout: NodeJS.Timeout
 
+  const minutes = Math.floor(timer / 60)
+  const seconds = timer % 60
+
+  const startCountdown = () => {
+    setIsCountdownActive(true)      
+  }
+
+  const stopCountdown = () => {
+    clearTimeout(countdownTimeout)
+    setIsCountdownActive(false)  
+    setHasCountdownFinished(false)    
+    setTimer(0.05 * 60)    
+  }
+  
   useEffect(() => {
     if(isCountdownActive && timer > 0){
       countdownTimeout = setTimeout(() => {
@@ -33,25 +47,10 @@ export const CountdownProvider = ({ children }: ICountdownProvider) => {
     } else if(isCountdownActive && timer === 0){
       setHasCountdownFinished(true)
       setIsCountdownActive(false)
+      startNewChallenge()
     }
 
   }, [isCountdownActive, timer])
-
-  const minutes = Math.floor(timer / 60)
-  const seconds = timer % 60
-
-  const startCountdown = () => {
-    setIsCountdownActive(true)  
-    startNewChallenge()  
-  }
-
-  const stopCountdown = () => {
-    clearTimeout(countdownTimeout)
-    setIsCountdownActive(false)  
-    setHasCountdownFinished(false)
-    resetChallenge()
-    setTimer(0.1 * 60)    
-  }
 
   return (
     <CountdownContext.Provider value={{

@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useState } from "react";
+import { createContext, ReactNode, useEffect, useState } from "react";
 import challenges from '../challenges.json'
 
 interface IChallenge{
@@ -35,12 +35,23 @@ export const ChallengesProvider = ({ children }: IChallengesProvider) => {
 
   const experienceToNextLevel = Math.pow((level + 1) * 4, 2)  
 
+  useEffect(() => {
+    Notification.requestPermission()
+   
+  }, []);
+
   const levelUp = () => setLevel(level + 1)
 
   const startNewChallenge = () => {
     const randomChallengeIndex = Math.floor(Math.random() * challenges.length)
     const challenge = challenges[randomChallengeIndex]
+
     setActiveChallenge(challenge)
+
+    Notification.permission === 'granted' && new Notification('Novo desafio | Move.it 🎉', {            
+        body: `Valendo ${challenge.amount}xp!`
+      })      
+    
   }
 
   const resetChallenge = () => {    
