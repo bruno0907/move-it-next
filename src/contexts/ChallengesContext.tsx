@@ -4,7 +4,7 @@ import challenges from '../challenges.json'
 interface IChallenge{
   type: 'body' | 'eye';
   description: string;
-  amount: number;
+  amount: number;  
 }
 
 interface IChallengesContextData{
@@ -13,9 +13,11 @@ interface IChallengesContextData{
   experienceToNextLevel: number;  
   challengesCompleted: number;
   activeChallenge: IChallenge;
+  setActiveChallenge: any;
   levelUp: () => void;
   startNewChallenge: () => void;
   resetChallenge: () => void;
+  completeChallenge: () => void;
 }
 
 interface IChallengesProvider{
@@ -42,7 +44,24 @@ export const ChallengesProvider = ({ children }: IChallengesProvider) => {
   }
 
   const resetChallenge = () => {    
+    setActiveChallenge(null)    
+  }
+
+  const completeChallenge = () => {
+    if (!activeChallenge) return
+
+    const { amount } = activeChallenge
+
+    let finalExperience = currentExperience + amount
+
+    if(finalExperience >= experienceToNextLevel){
+      finalExperience = finalExperience - experienceToNextLevel
+      levelUp()      
+    }
+
+    setCurrentExperience(finalExperience)
     setActiveChallenge(null)
+    setChallengesCompleted(challengesCompleted + 1)
   }
 
   return (
@@ -54,7 +73,9 @@ export const ChallengesProvider = ({ children }: IChallengesProvider) => {
       challengesCompleted,
       startNewChallenge,
       resetChallenge,
-      activeChallenge
+      activeChallenge,
+      setActiveChallenge,
+      completeChallenge
     }}>
       { children }
     </ChallengesContext.Provider>  
