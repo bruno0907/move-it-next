@@ -17,9 +17,9 @@ interface ICountdownProvider{
 export const CountdownContext = createContext({} as ICountdownContext)
 
 export const CountdownProvider = ({ children }: ICountdownProvider) => {
-  const { startNewChallenge, resetChallenge } = useContext(ChallengesContext)
+  const { startNewChallenge } = useContext(ChallengesContext)
   
-  const [timer, setTimer] = useState(0.05 * 60)
+  const [timer, setTimer] = useState(25 * 60)
   const [isCountdownActive, setIsCountdownActive] = useState(false)
   const [hasCountdownFinished, setHasCountdownFinished] = useState(false)
   
@@ -36,7 +36,7 @@ export const CountdownProvider = ({ children }: ICountdownProvider) => {
     clearTimeout(countdownTimeout)
     setIsCountdownActive(false)  
     setHasCountdownFinished(false)    
-    setTimer(0.05 * 60)    
+    setTimer(25 * 60)    
   }
   
   useEffect(() => {

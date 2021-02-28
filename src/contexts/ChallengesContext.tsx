@@ -1,5 +1,8 @@
 import { createContext, ReactNode, useEffect, useState } from "react";
+import Cookies from 'js-cookie'
+
 import challenges from '../challenges.json'
+import { LevelUpModal } from "../components/LevelUpModal";
 
 interface IChallenge{
   type: 'body' | 'eye';
@@ -13,24 +16,31 @@ interface IChallengesContextData{
   experienceToNextLevel: number;  
   challengesCompleted: number;
   activeChallenge: IChallenge;
-  setActiveChallenge: any;
+  setActiveChallenge: any;  
+  isLevelUpModalOpen: boolean;
+  setIsLevelUpModalOpen: (isLevelUpModalOpen: boolean) => void;
   levelUp: () => void;
   startNewChallenge: () => void;
   resetChallenge: () => void;
   completeChallenge: () => void;
+  handleModal: () => void;
 }
 
 interface IChallengesProvider{
   children: ReactNode;
+  level: number;
+  currentExperience: number;
+  challengesCompleted: number;    
 }
 
 export const ChallengesContext = createContext({} as IChallengesContextData)
 
-export const ChallengesProvider = ({ children }: IChallengesProvider) => {
-  const [level, setLevel] = useState(1)
-  const [currentExperience, setCurrentExperience] = useState(0)
-  const [challengesCompleted, setChallengesCompleted] = useState(0)  
-
+export const ChallengesProvider = ({ children, ...rest }: IChallengesProvider) => {
+  const [level, setLevel] = useState(rest.level ?? 1)
+  const [currentExperience, setCurrentExperience] = useState(rest.currentExperience ?? 0)
+  const [challengesCompleted, setChallengesCompleted] = useState(rest.challengesCompleted ?? 0)  
+  const [isLevelUpModalOpen, setIsLevelUpModalOpen] = useState(false)
+  
   const [activeChallenge, setActiveChallenge] = useState(null)
 
   const experienceToNextLevel = Math.pow((level + 1) * 4, 2)  
@@ -40,7 +50,17 @@ export const ChallengesProvider = ({ children }: IChallengesProvider) => {
    
   }, []);
 
-  const levelUp = () => setLevel(level + 1)
+  useEffect(() => {
+    Cookies.set('level', String(level))
+    Cookies.set('currentExperience', String(currentExperience))
+    Cookies.set('challengesCompleted', String(challengesCompleted))      
+
+  }, [level, currentExperience, challengesCompleted])  
+
+  const levelUp = () => {
+    setLevel(level + 1)
+    setIsLevelUpModalOpen(!isLevelUpModalOpen)
+  }
 
   const startNewChallenge = () => {
     const randomChallengeIndex = Math.floor(Math.random() * challenges.length)
@@ -86,9 +106,12 @@ export const ChallengesProvider = ({ children }: IChallengesProvider) => {
       resetChallenge,
       activeChallenge,
       setActiveChallenge,
-      completeChallenge
+      completeChallenge,        
+      isLevelUpModalOpen,
+      setIsLevelUpModalOpen    
     }}>
       { children }
+      { isLevelUpModalOpen && <LevelUpModal /> }
     </ChallengesContext.Provider>  
   )
 }
