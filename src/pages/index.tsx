@@ -3,12 +3,13 @@ import React from "react";
 import Head from 'next/head'
 import { GetServerSideProps } from 'next'
 
+import Sidebar from "../components/Sidebar";
 import Profile from "../components/Profile";
 import CountdownTimer from "../components/CountdownTimer";
 import ExperienceBar from "../components/ExperienceBar";
 import Challenges from "../components/Challenges";
 
-import { Container, Content } from '../styles/App'
+import { Container } from '../styles/App'
 import { ChallengesProvider } from "../contexts/ChallengesContext";
 import CountdownProvider from "../contexts/CountdownContext";
 
@@ -28,21 +29,27 @@ export default function Home(props: IHome) {
       <Head>
         <title>Bem vindo ao Move.it</title>
       </Head>  
-      <Container>
-        <ExperienceBar /> 
-        <Content>
 
-          <CountdownProvider>
-            <aside>
-              <Profile />          
-              <CountdownTimer />
-            </aside>
-            <section>
-              <Challenges />
-            </section>
-          </CountdownProvider>
+      <Container>       
+        <header>
+          <ExperienceBar /> 
+        </header>
+
+        <aside>
+          <Sidebar />         
+        </aside>      
+
+        <CountdownProvider>
+          <main>
+            <Profile />          
+            <CountdownTimer />
+          </main>
+          <section>
+            <Challenges />
+          </section>
+        </CountdownProvider>
           
-        </Content>
+        
       </Container>
     </ChallengesProvider>
   )

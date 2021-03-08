@@ -4,9 +4,7 @@ import { ChallengesContext } from '../../contexts/ChallengesContext'
 import { Container, Overlay } from './styles'
 
 export const LevelUpModal = () => {
-  const { level, isLevelUpModalOpen, setIsLevelUpModalOpen } = useContext(ChallengesContext)
-
-  const handleModal = () => setIsLevelUpModalOpen(!isLevelUpModalOpen)
+  const { level, setIsLevelUpModalOpen } = useContext(ChallengesContext)  
 
   return (
     <Overlay>
@@ -14,7 +12,7 @@ export const LevelUpModal = () => {
         <header>{level}</header>
         <strong>Parabéns</strong>
         <p>Você alcançou um novo nível.</p>
-        <button onClick={handleModal}>
+        <button onClick={() => setIsLevelUpModalOpen(false)}>
           <img src="/images/close.svg" alt="Fechar modal"/>
         </button>
       </Container>

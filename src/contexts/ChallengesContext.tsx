@@ -22,8 +22,7 @@ interface IChallengesContextData{
   levelUp: () => void;
   startNewChallenge: () => void;
   resetChallenge: () => void;
-  completeChallenge: () => void;
-  handleModal: () => void;
+  completeChallenge: () => void;  
 }
 
 interface IChallengesProvider{
@@ -59,7 +58,7 @@ export const ChallengesProvider = ({ children, ...rest }: IChallengesProvider) =
 
   const levelUp = () => {
     setLevel(level + 1)
-    setIsLevelUpModalOpen(!isLevelUpModalOpen)
+    setIsLevelUpModalOpen(true)
   }
 
   const startNewChallenge = () => {

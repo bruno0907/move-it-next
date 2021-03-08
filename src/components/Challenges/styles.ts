@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`  
-  height: 100%;
+  height: 100%;  
+  padding: 2rem;
   display: flex;
   align-items: center;
   justify-content: center;  
@@ -12,7 +13,7 @@ export const Container = styled.div`
 `
 
 export const ChallengeCard = styled.div`  
-  display: flex;
+  display: flex;  
   flex-direction: column;
   align-items: center;
   justify-content: space-between;  

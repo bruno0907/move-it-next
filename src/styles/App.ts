@@ -1,53 +1,76 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  height: 100vh;
-  max-width: 992px;
-  margin: 0 auto;
-  padding: 2.5rem 2rem;
-  display: flex;
-  flex-direction: column;    
-`
+  height: 100vh;  
+  display: grid;
+  grid-template-columns: 115px 1fr 1fr;
+  grid-template-rows: 115px 1fr 115px;    
+  grid-template-areas:
+    "Sidebar ExperienceBar ExperienceBar"
+    "Sidebar Main Challenges"
+    "Sidebar . . ";  
 
-export const Content = styled.div`
-  display: flex;
-  justify-content: space-between;
-  margin-top: 110px;  
+  header{
+    grid-area: ExperienceBar;        
+    padding: 2rem;    
+    align-self: center;    
+  }
   
   aside{
-    width: 40%;    
+    grid-area: Sidebar;            
+  }
+
+  main{
+    grid-area: Main;     
+    width: 100%;
+    max-width: 465px;
+    padding: 5rem 2rem;
+    justify-self: flex-end;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;      
-  }
-  
-  section{    
-    width: 468px;   
-    height: 550px;
+    justify-content: space-between;  
   }
 
-  @media(max-width: 865px){
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
-    aside{
-      width: 80%;
-      margin-bottom: 2rem;
-    }
-
-    section{
-      width: 80%;
-    }
+  section{  
+    grid-area: Challenges;    
+    width: 100%;    
+    max-width: 465px;
+    justify-self: flex-start;    
+    padding: 5rem 2rem;       
   }
 
-  @media(max-width: 720px){
-    aside{
-      width: 100%;
-    }
+  @media(max-width: 1090px){
+    grid-template-columns: 115px 1fr;
+    grid-template-rows: 115px 1fr 1fr;  
+    grid-template-areas:
+      "Sidebar ExperienceBar"
+      "Sidebar Main"
+      "Sidebar Challenges";
 
-    section{
-      width: 100%;
-    }
+      main{
+        justify-self: center;
+      }
+
+      section{
+        justify-self: center;
+      }
+  }
+
+  @media(max-width: 695px){
+    grid-template-columns: 1fr;
+    grid-template-rows: 80px 80px 1fr 1fr;  
+    grid-template-areas:
+      "Sidebar"
+      "ExperienceBar"
+      "Main"      
+      "Challenges";
+
+      main{
+        padding: 2rem;
+      }
+
+      section{
+        padding: 2rem;
+      }
   }
 `
