@@ -1,68 +1,40 @@
 import React from "react";
-
+import Link from 'next/link'
 import Head from 'next/head'
-import { GetServerSideProps } from 'next'
 
-import Sidebar from "../components/Sidebar";
-import Profile from "../components/Profile";
-import CountdownTimer from "../components/CountdownTimer";
-import ExperienceBar from "../components/ExperienceBar";
-import Challenges from "../components/Challenges";
+import { Container, Content, Header } from '../styles/Home'
 
-import { Container } from '../styles/App'
-import { ChallengesProvider } from "../contexts/ChallengesContext";
-import CountdownProvider from "../contexts/CountdownContext";
+export default function Home() { 
+  return(
+    <>
 
-interface IHome{
-  level: number;
-  currentExperience: number;
-  challengesCompleted: number;  
-}
+    <Head>
+        <title>Move.it | Seja bem-vindo</title>
+    </Head>  
 
-export default function Home(props: IHome) {  
-  return (
-    <ChallengesProvider 
-      level={props.level} 
-      currentExperience={props.currentExperience} 
-      challengesCompleted={props.challengesCompleted}     
-    >
-      <Head>
-        <title>Bem vindo ao Move.it</title>
-      </Head>  
-
-      <Container>       
-        <header>
-          <ExperienceBar /> 
-        </header>
-
-        <aside>
-          <Sidebar />         
-        </aside>      
-
-        <CountdownProvider>
-          <main>
-            <Profile />          
-            <CountdownTimer />
-          </main>
-          <section>
-            <Challenges />
-          </section>
-        </CountdownProvider>
-          
-        
-      </Container>
-    </ChallengesProvider>
+    <Container>
+      <Header>
+        <Link href="/app">
+          <button>Login</button>
+        </Link>
+      </Header>
+      <Content>
+        <section>
+          <img src="/images/logo-large.svg" alt=""/>
+          <h1>Seja Bem-vindo</h1>
+          <div>
+            <p>Faça seu login para continuar ou <br />cadastre-se abaixo!</p>            
+          </div>
+          <form>
+            <fieldset>
+              <input type="email" name="email" placeholder="Digite seu melhor email"/>
+              <button> Entrar </button>
+            </fieldset>
+          </form>
+        </section>                
+      </Content>
+    </Container>
+    
+    </>
   )
-}
-
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const { level, currentExperience, challengesCompleted, experienceToNextLevel } = ctx.req.cookies
-
-  return {
-    props: {
-      level: Number(level),
-      currentExperience: Number(currentExperience),
-      challengesCompleted: Number(challengesCompleted),         
-    }
-  }
 }

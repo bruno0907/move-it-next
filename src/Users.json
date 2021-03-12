@@ -1,0 +1,17 @@
+[
+  {
+    "name": "Usuário 1",
+    "level": 1,
+    "experience": 0
+  },
+  {
+    "name": "Usuário 2",
+    "level": 10,
+    "experience": 2980
+  },
+  {
+    "name": "Usuário 3",
+    "level": 4,
+    "experience": 668
+  }
+]  

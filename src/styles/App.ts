@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const Container = styled.div`
   height: 100vh;  
@@ -17,7 +17,7 @@ export const Container = styled.div`
   }
   
   aside{
-    grid-area: Sidebar;            
+    grid-area: Sidebar; 
   }
 
   main{

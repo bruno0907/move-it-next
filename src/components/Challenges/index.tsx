@@ -1,8 +1,14 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext } from 'react'
 import { ChallengesContext } from '../../contexts/ChallengesContext';
 import { CountdownContext } from '../../contexts/CountdownContext';
 
-import { Container, NoChallengeCard, WithChallengeCard, ChallengeFailedButton, ChallengeCompleteButton } from './styles';
+import { 
+  Container, 
+  NoChallengeCard, 
+  WithChallengeCard, 
+  ChallengeFailedButton, 
+  ChallengeCompleteButton 
+} from './styles';
 
 const Challenges = () => {
   const { activeChallenge, resetChallenge, completeChallenge } = useContext(ChallengesContext)  

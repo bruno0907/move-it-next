@@ -16,7 +16,7 @@ export const Header = styled.header`
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  padding: 5rem 7rem;
+  padding: 5rem 8rem;
 
   button{
     padding: 1rem 3rem;
@@ -35,7 +35,7 @@ export const Header = styled.header`
 
 export const Content = styled.main`  
   width: 100%;
-  padding: 2rem 5rem;
+  padding: 2rem 8rem;
   display: flex;
   justify-content: flex-end;  
 
